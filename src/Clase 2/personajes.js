@@ -43,7 +43,7 @@ console.log(nombreSeries);
 const tipoSeries = series.map(serie => serie.genero);
 console.log(tipoSeries);
 
-let acumuladorAnios = (series.reduce((a, b) => a.anio + b.anio, 0))
+let acumuladorAnios = (series.reduce((a, b) => a + b, 0))
 
 let promedioAnios = acumuladorAnios / series.length
 
