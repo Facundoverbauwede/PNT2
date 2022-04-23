@@ -10,7 +10,7 @@ const personajes = [
         id: 2,
         nombre: 'calamardo',
         tipo : 'principal',
-        edad: 40,
+        edad: 22,
         imagen: 'https://wikidat.com/img/calamardo-tentaculos-1ffaa2fed1bf0eda39bd62d521f3fc29.jpg'
     },
     {
@@ -40,43 +40,42 @@ const personajes = [
         tipo : 'secundario',
         edad: 22,
         imagen: 'http://assets.stickpng.com/images/580b57fcd9996e24bc43c32a.png'
-    },
-    {
-        id: 7,
-        nombre: 'bombon',
-        tipo : 'principal',
-        edad: 22
-    },
-    {
-        id: 8,
-        nombre: 'patricio estrella',
-        tipo : 'secundario',
-        edad: 22
     }
 ];
 
 const searchById = () => {
     const id = parseInt(document.getElementById('id').value);
-    const personaje = personajes.find(personaje => personaje.id == id);
-    const row = `<p>${personaje.nombre}</p>`;
-    document.getElementById("row").innerHTML = '';
-    document.getElementById("row").insertAdjacentHTML('beforeend', row);
-    alert(personaje.nombre);
+    if (id > personajes.length || id <= 0){
+        alert("El nro de id seleccionado no corresponde a un personaje.")
+    }else {
+        const personaje = personajes.find(personaje => personaje.id == id);
+        const card = crearCard(personaje);
+          document.getElementById("row").innerHTML = '';
+          document.getElementById("row").insertAdjacentHTML('beforeend', card);
+    }
+}
+
+const crearCard = (personaje) => {
+    const card = `
+    <div class= "col-5 mt-5">
+    <div class="card" style="width: 18rem;">
+    <img src="${personaje.imagen}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"> ${personaje.nombre}   </h5>
+      <p class="card-text"> ${personaje.edad}     </p>
+    </div>
+  </div>
+  </div>`;
+
+    return card;
 }
 
 const primera = () => {
-    console.log("me ejecuto cuando se carga la pagina");
-    
-    console.log(personajes);
-
-    const names = personajes.map(personaje => personaje.nombre);
-    console.log(names);
-
-    const promedio = (personajes.reduce((valAnterior, valActual) => valAnterior + valActual.edad, 0))/personajes.length;
-    console.log(promedio);
-
-    const principales = personajes.filter(personaje => personaje.tipo === 'principal');
-    console.log(principales);
+    document.getElementById("row").innerHTML='';
+    personajes.forEach(personaje => {
+        const card = crearCard(personaje);
+        document.getElementById("row").insertAdjacentHTML('beforeend', card);
+    });
 }
 
 window.onload = primera();

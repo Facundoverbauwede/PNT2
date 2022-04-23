@@ -70,7 +70,6 @@ const insertarCard = (id) => {
       <p class="card-text"> ${personaje.id.edad}     </p>
     </div>
   </div>`;
-  return card;
 }
 
 window.onload = primera();
